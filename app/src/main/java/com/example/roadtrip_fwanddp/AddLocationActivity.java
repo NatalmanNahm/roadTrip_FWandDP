@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -11,7 +13,15 @@ import com.example.roadtrip_fwanddp.JsonUtil.ReadJson;
 
 import java.util.ArrayList;
 
-public class AddLocationActivity extends AppCompatActivity {
+public class AddLocationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    String selectedState;
+    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> cAdapter;
+    Spinner stateSpinner;
+    Spinner citySpinner;
+    ArrayList<String> cityList;
+    String jsonCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,23 +30,41 @@ public class AddLocationActivity extends AppCompatActivity {
 
         String jsonState = ReadJson.loadJSONFromAsset(getApplicationContext(), "states.json");
         ArrayList<String> statesList = ReadJson.extractState(jsonState);
-        Spinner stateSpinner = findViewById(R.id.stateSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
+        stateSpinner = findViewById(R.id.stateSpinner);
+        adapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item, statesList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateSpinner.setAdapter(adapter);
+        stateSpinner.setOnItemSelectedListener(this);
         adapter.notifyDataSetChanged();
 
-        String selectedState = stateSpinner.getSelectedItem().toString();
+        selectedState = stateSpinner.getSelectedItem().toString();
         Log.i("STATESELECTED", selectedState);
-        String jsonCity = ReadJson.loadJSONFromAsset(getApplicationContext(), "citiesStates.json");
-        ArrayList<String> cityList = ReadJson.extractCities(jsonCity, selectedState);
-        Spinner citySpinner = findViewById(R.id.citiesSpinner);
-        ArrayAdapter<String> cAdapter = new ArrayAdapter<String>(getApplicationContext(),
+        jsonCity = ReadJson.loadJSONFromAsset(getApplicationContext(), "citiesStates.json");
+        cityList = ReadJson.extractCities(jsonCity, selectedState);
+        citySpinner = findViewById(R.id.citiesSpinner);
+        cAdapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item, cityList);
         cAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citySpinner.setAdapter(cAdapter);
 
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        selectedState = parent.getItemAtPosition(position).toString();
+        adapter.notifyDataSetChanged();
+        cityList = ReadJson.extractCities(jsonCity, selectedState);
+        cAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item, cityList);
+        cAdapter.notifyDataSetChanged();
+        citySpinner.setAdapter(cAdapter);
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
