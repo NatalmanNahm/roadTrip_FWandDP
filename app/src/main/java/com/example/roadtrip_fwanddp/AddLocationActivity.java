@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.roadtrip_fwanddp.JsonUtil.ReadJson;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 public class AddLocationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     String selectedState;
+    String selectedCity;
+    Button addLocBtn;
     ArrayAdapter<String> adapter;
     ArrayAdapter<String> cAdapter;
     Spinner stateSpinner;
@@ -46,7 +49,25 @@ public class AddLocationActivity extends AppCompatActivity implements AdapterVie
         cAdapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item, cityList);
         cAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCity = parent.getItemAtPosition(position).toString();;
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         citySpinner.setAdapter(cAdapter);
+        selectedCity = citySpinner.getSelectedItem().toString();
+
+        addLocBtn = findViewById(R.id.addLocBtn);
+        addLocBtn.setOnClickListener(v -> {
+            Log.i("LOCATIONTRIP", selectedCity + selectedState);
+        });
 
 
     }
