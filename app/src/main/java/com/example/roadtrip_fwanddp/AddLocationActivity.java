@@ -2,6 +2,7 @@ package com.example.roadtrip_fwanddp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -67,6 +68,11 @@ public class AddLocationActivity extends AppCompatActivity implements AdapterVie
         addLocBtn = findViewById(R.id.addLocBtn);
         addLocBtn.setOnClickListener(v -> {
             Log.i("LOCATIONTRIP", selectedCity + selectedState);
+            Intent intent = new Intent();
+            intent.putExtra("state", selectedState);
+            intent.putExtra("city", selectedCity);
+            setResult(RESULT_OK, intent);
+            finish();
         });
 
 
