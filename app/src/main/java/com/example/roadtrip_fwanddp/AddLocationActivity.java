@@ -35,6 +35,15 @@ public class AddLocationActivity extends AppCompatActivity implements AdapterVie
 
         String jsonState = ReadJson.loadJSONFromAsset(getApplicationContext(), "states.json");
         ArrayList<State> statesListAll = ReadJson.extractState(jsonState);
+
+        ArrayList<String> statesList = new ArrayList<>();
+
+        for (int i = 0; i < statesListAll.size(); i ++){
+            State state = statesListAll.get(i);
+            String stateName = state.getName();
+            statesList.add(stateName);
+        }
+
         stateSpinner = findViewById(R.id.stateSpinner);
         adapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item, statesList);
