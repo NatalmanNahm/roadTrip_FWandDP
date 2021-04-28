@@ -87,4 +87,27 @@ public class ReadJson {
 
         return citiesList;
     }
+
+    public static String getStateAbr(String json, String state){
+        isEmptyStringJson(json);
+
+        String stateAbr = "";
+
+        try {
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i<jsonArray.length(); i++){
+                JSONObject s = jsonArray.getJSONObject(i);
+                String st = s.getString("name");
+
+                if (st.equals(state)){
+                    stateAbr = s.getString("abbreviation");
+                }
+            }
+        }catch (JSONException e) {
+            //If there is a problem parsing the Json object print this message
+            Log.e(TAG, "Error parsing the Json object");
+        }
+
+        return stateAbr;
+    }
 }

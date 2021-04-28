@@ -23,6 +23,7 @@ public class AddLocationActivity extends AppCompatActivity implements AdapterVie
     Button addLocBtn;
     ArrayAdapter<String> adapter;
     ArrayAdapter<String> cAdapter;
+    String jsonState;
     Spinner stateSpinner;
     Spinner citySpinner;
     ArrayList<String> cityList;
@@ -33,7 +34,7 @@ public class AddLocationActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_location);
 
-        String jsonState = ReadJson.loadJSONFromAsset(getApplicationContext(), "states.json");
+        jsonState = ReadJson.loadJSONFromAsset(getApplicationContext(), "states.json");
         ArrayList<State> statesListAll = ReadJson.extractState(jsonState);
 
         ArrayList<String> statesList = new ArrayList<>();
@@ -78,8 +79,9 @@ public class AddLocationActivity extends AppCompatActivity implements AdapterVie
         addLocBtn = findViewById(R.id.addLocBtn);
         addLocBtn.setOnClickListener(v -> {
             Log.i("LOCATIONTRIP", selectedCity + selectedState);
+            String abrState = ReadJson.getStateAbr(jsonState, selectedState);
             Intent intent = new Intent();
-            intent.putExtra("state", selectedState);
+            intent.putExtra("state", abrState);
             intent.putExtra("city", selectedCity);
             setResult(RESULT_OK, intent);
             finish();
