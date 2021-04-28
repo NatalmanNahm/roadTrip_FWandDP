@@ -39,10 +39,10 @@ public class ReadJson {
         return null;
     }
 
-    public static ArrayList<String> extractState(String json){
+    public static ArrayList<State> extractState(String json){
         isEmptyStringJson(json);
 
-        ArrayList<String> statesList = new ArrayList<>();
+        ArrayList<State> statesList = new ArrayList<>();
 
         try{
 
@@ -50,7 +50,8 @@ public class ReadJson {
             for (int i = 0; i< jsonArray.length(); i++){
                 JSONObject statesObject = jsonArray.getJSONObject(i);
                 String state = statesObject.getString("name");
-                statesList.add(state);
+                String abr = statesObject.getString("abbreviation");
+                statesList.add(new State(state, abr));
             }
 
         }catch (JSONException e) {

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.roadtrip_fwanddp.JsonUtil.ReadJson;
+import com.example.roadtrip_fwanddp.JsonUtil.State;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,7 @@ public class AddLocationActivity extends AppCompatActivity implements AdapterVie
         setContentView(R.layout.activity_add_location);
 
         String jsonState = ReadJson.loadJSONFromAsset(getApplicationContext(), "states.json");
-        ArrayList<String> statesList = ReadJson.extractState(jsonState);
+        ArrayList<State> statesListAll = ReadJson.extractState(jsonState);
         stateSpinner = findViewById(R.id.stateSpinner);
         adapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item, statesList);
