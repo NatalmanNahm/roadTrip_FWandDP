@@ -1,4 +1,4 @@
-package com.example.roadtrip_fwanddp.JsonUtil;
+package com.example.roadtrip_fwanddp.Utils;
 
 import android.content.Context;
 import android.text.TextUtils;

@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.example.roadtrip_fwanddp.JsonUtil.ReadJson;
+import com.example.roadtrip_fwanddp.Utils.ReadJson;
 import com.example.roadtrip_fwanddp.Model.State;
 
 import java.util.ArrayList;
