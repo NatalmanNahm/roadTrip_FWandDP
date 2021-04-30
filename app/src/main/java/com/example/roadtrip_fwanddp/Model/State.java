@@ -1,4 +1,4 @@
-package com.example.roadtrip_fwanddp.JsonUtil;
+package com.example.roadtrip_fwanddp.Model;
 
 public class State {
     private String name;

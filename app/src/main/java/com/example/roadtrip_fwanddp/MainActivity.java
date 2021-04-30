@@ -5,13 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.roadtrip_fwanddp.Model.Location;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
+
+    Location curLoc;
+    Location opt1Loc;
+    Location opt2Loc;
+    Location opt3Loc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,22 +64,26 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK){
                 TextView cur = findViewById(R.id.currentLocTxt);
                 setLocation(data, cur, "Current Location:");
+                curLoc = getLocation(data);
             }
 
         } else if (requestCode == 2) {
             if (resultCode == RESULT_OK){
                 TextView optOne = findViewById(R.id.optionOneTxt);
                 setLocation(data, optOne, "Option One:");
+                opt1Loc = getLocation(data);
             }
         } else if (requestCode == 3) {
             if (resultCode == RESULT_OK){
                 TextView optTwo = findViewById(R.id.optionTwoTxt);
                 setLocation(data, optTwo, "Option Two:");
+                opt2Loc = getLocation(data);
             }
         } else {
             if (resultCode == RESULT_OK){
                 TextView optThree = findViewById(R.id.optionThreeTxt);
                 setLocation(data, optThree, "Option Three:");
+                opt3Loc = getLocation(data);
             }
         }
     }
@@ -84,5 +93,13 @@ public class MainActivity extends AppCompatActivity {
         String city = data.getStringExtra("city");
 
         view.setText(option + " " + city + ", " + state);
+
+    }
+
+    public Location getLocation (Intent data){
+        String state = data.getStringExtra("state");
+        String city = data.getStringExtra("city");
+
+        return new Location(state, city);
     }
 }

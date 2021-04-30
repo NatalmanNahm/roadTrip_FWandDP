@@ -4,6 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.roadtrip_fwanddp.Model.State;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
