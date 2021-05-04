@@ -112,4 +112,32 @@ public class ReadJson {
 
         return stateAbr;
     }
+
+
+    public static int getDistance(String json){
+        isEmptyStringJson(json);
+
+        int distance = 0;
+
+        try {
+            JSONObject root = new JSONObject(json);
+            JSONArray rows = root.getJSONArray("rows");
+
+            JSONObject r = rows.getJSONObject(0);
+            JSONArray elements = r.getJSONArray("elements");
+
+            JSONObject elementContent = elements.optJSONObject(0);
+            JSONObject dist = elementContent.getJSONObject("distance");
+            String mile = dist.getString("text");
+            String[] separatedMile = mile.split(" ");
+            String mileNum = separatedMile[0];
+            distance = Integer.parseInt(mileNum);
+
+        }catch (JSONException e) {
+            //If there is a problem parsing the Json object print this message
+            Log.e(TAG, "Error parsing the Json object");
+        }
+
+        return distance;
+    }
 }

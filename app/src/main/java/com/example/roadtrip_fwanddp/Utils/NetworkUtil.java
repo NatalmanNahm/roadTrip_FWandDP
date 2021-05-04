@@ -25,6 +25,7 @@ public class NetworkUtil {
     private static final String units = "imperial";
     private static final String ORIGIN = "origins";
     private static final String DEST = "destinations";
+    private static final String ERROR = "Problem making the HTTP request";
 
 
 
@@ -133,6 +134,21 @@ public class NetworkUtil {
             }
         }
         return output.toString();
+    }
+
+    public static int fetchDistance(Location origin, Location destination ){
+        URL url = build_distance_url(origin, destination);
+
+        String jsonResponse = null;
+
+        try {
+            jsonResponse = getResponseFromHttpUrl(url);
+        } catch (IOException e) {
+            Log.e(TAG, ERROR, e);
+        }
+
+        return ReadJson.getDistance(jsonResponse);
+
     }
 
 
