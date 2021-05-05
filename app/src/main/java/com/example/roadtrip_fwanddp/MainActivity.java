@@ -25,7 +25,11 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton addLocFab = findViewById(R.id.add_fab);
         addLocFab.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, AddLocationActivity.class);
+            Intent intent = new Intent(MainActivity.this, TripOptionActivity.class);
+            intent.putExtra("currentLoc", curLoc);
+            intent.putExtra("option1", opt1Loc);
+            intent.putExtra("option2", opt2Loc);
+            intent.putExtra("option3", opt3Loc);
             startActivity(intent);
 
         });
