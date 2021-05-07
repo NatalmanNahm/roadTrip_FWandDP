@@ -30,7 +30,7 @@ public class Location implements Parcelable {
     };
 
     public String getLocation(){
-        final String s = this.state + ", " + this.state;
+        final String s = this.city + ", " + this.state;
         return s;
     }
 

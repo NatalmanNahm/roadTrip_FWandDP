@@ -128,10 +128,10 @@ public class ReadJson {
 
             JSONObject elementContent = elements.optJSONObject(0);
             JSONObject dist = elementContent.getJSONObject("distance");
-            String mile = dist.getString("text");
-            String[] separatedMile = mile.split(" ");
-            String mileNum = separatedMile[0];
-            distance = Integer.parseInt(mileNum);
+            int meter = dist.getInt("value");
+            double miles = meter * 0.00062137;
+            distance = (int) miles;
+            Log.i("DISTAANCEO", String.valueOf(distance));
 
         }catch (JSONException e) {
             //If there is a problem parsing the Json object print this message

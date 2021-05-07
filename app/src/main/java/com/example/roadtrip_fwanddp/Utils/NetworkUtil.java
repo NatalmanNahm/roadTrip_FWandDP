@@ -55,6 +55,7 @@ public class NetworkUtil {
      */
     private static URL build_distance_url(Location origin, Location destination){
         String org = origin.getLocation();
+        Log.i("PROCOM", org);
         String dest = destination.getLocation();
 
 
@@ -66,6 +67,7 @@ public class NetworkUtil {
                 .build();
 
         URL url = tryBuildUrl(uriBuilder);
+        Log.i("URLMAP", String.valueOf(url));
         return url;
     }
 
@@ -113,6 +115,7 @@ public class NetworkUtil {
                 inputStream.close();
             }
         }
+        Log.i("JSONMAP", jsonResponse);
         return jsonResponse;
     }
 
