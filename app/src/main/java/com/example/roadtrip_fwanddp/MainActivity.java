@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.roadtrip_fwanddp.Model.Location;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,12 +27,16 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton addLocFab = findViewById(R.id.add_fab);
         addLocFab.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, TripOptionActivity.class);
-            intent.putExtra("currentLoc", curLoc);
-            intent.putExtra("option1", opt1Loc);
-            intent.putExtra("option2", opt2Loc);
-            intent.putExtra("option3", opt3Loc);
-            startActivity(intent);
-
+            if (curLoc == null || opt1Loc == null || opt2Loc == null || opt3Loc == null ){
+                Toast.makeText(this, "Make sure all destination are selected"
+                        , Toast.LENGTH_SHORT).show();
+            } else{
+                intent.putExtra("currentLoc", curLoc);
+                intent.putExtra("option1", opt1Loc);
+                intent.putExtra("option2", opt2Loc);
+                intent.putExtra("option3", opt3Loc);
+                startActivity(intent);
+            }
         });
 
         Button addCurBtn = findViewById(R.id.addCurLocBtn);

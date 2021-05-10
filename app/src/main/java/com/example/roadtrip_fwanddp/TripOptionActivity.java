@@ -10,7 +10,10 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.roadtrip_fwanddp.Model.Location;
+import com.example.roadtrip_fwanddp.Model.Node;
 import com.example.roadtrip_fwanddp.Utils.NetworkUtil;
+
+import java.util.concurrent.ExecutionException;
 
 public class TripOptionActivity extends AppCompatActivity {
 
@@ -33,22 +36,36 @@ public class TripOptionActivity extends AppCompatActivity {
         option3 = getIntent().getParcelableExtra("option3");
         tripOneTxt = findViewById(R.id.opt1Trip1_txt);
 
-        new FetchDistance().execute();
+        Node nodeOrigin = new Node(curLoc.getLocation());
+        Node nodeDestination1 = new Node(option1.getLocation());
+        Node nodeDestination2 = new Node(option2.getLocation());
+        Node nodeDestination3 = new Node(option3.getLocation());
+
+        try {
+            distToLocOpt1 = new FetchDistance(curLoc, option1).execute().get();
+            Log.i("DISTANCEONE", String.valueOf(distToLocOpt1));
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
     public class FetchDistance extends AsyncTask<String, Void, Integer>{
 
-        @Override
-        protected Integer doInBackground(String... strings) {
-            distToLocOpt1 = NetworkUtil.fetchDistance(curLoc, option1);
+        private Location origin;
+        private Location destination;
 
-            return distToLocOpt1;
+        public FetchDistance(Location origin, Location destination) {
+            this.origin = origin;
+            this.destination = destination;
         }
 
         @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            tripOneTxt.setText(distToLocOpt1);
+        protected Integer doInBackground(String... strings) {
+            int distance = NetworkUtil.fetchDistance(origin, destination);
+
+            return distance;
         }
     }
 }
