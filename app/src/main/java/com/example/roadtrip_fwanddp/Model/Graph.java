@@ -3,6 +3,10 @@ package com.example.roadtrip_fwanddp.Model;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Reference: Code copied form here: https://www.baeldung.com/java-dijkstra
+ */
+
 public class Graph {
 
     private Set<Node> nodes = new HashSet<>();
