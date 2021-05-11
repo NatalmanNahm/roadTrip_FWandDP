@@ -1,8 +1,11 @@
 package com.example.roadtrip_fwanddp.Utils;
 
+import android.util.Log;
+
 import com.example.roadtrip_fwanddp.Model.Graph;
 import com.example.roadtrip_fwanddp.Model.Node;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
@@ -10,10 +13,10 @@ import java.util.Set;
 
 public class Dk_Algorithm {
 
-    public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
+    public static ArrayList<Node> calculateShortestPathFromSource( Node source) {
         source.setDistance(0);
 
-        Set<Node> settledNodes = new HashSet<>();
+        ArrayList<Node> settledNodes = new ArrayList<>();
         Set<Node> unsettledNodes = new HashSet<>();
 
         unsettledNodes.add(source);
@@ -31,8 +34,10 @@ public class Dk_Algorithm {
                 }
             }
             settledNodes.add(currentNode);
+            Log.i("NODEADDED", currentNode.getName());
+            Log.i("NODEADDED", currentNode.getDistance().toString());
         }
-        return graph;
+        return settledNodes;
     }
 
     private static Node getLowestDistanceNode(Set < Node > unsettledNodes) {
