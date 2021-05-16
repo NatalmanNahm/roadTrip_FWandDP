@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.roadtrip_fwanddp.Model.PopulationCities;
 import com.example.roadtrip_fwanddp.Model.State;
 
 import org.json.JSONArray;
@@ -88,6 +89,33 @@ public class ReadJson {
         }
 
         return citiesList;
+    }
+
+    public static ArrayList<PopulationCities> extractPopCities(String json, String state){
+        isEmptyStringJson(json);
+
+        ArrayList<PopulationCities> popCityList = new ArrayList<>();
+
+        try{
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i<jsonArray.length(); i++){
+                JSONObject stObject = jsonArray.getJSONObject(i);
+                String st = stObject.getString("region");
+
+                if (st.equals(state)){
+                    String city = stObject.getString("subregion");
+                    String population = stObject.getString("population");
+
+                    popCityList.add(new PopulationCities(state, city, population));
+                }
+            }
+
+        }catch (JSONException e) {
+            //If there is a problem parsing the Json object print this message
+            Log.e(TAG, "Error parsing the Json object");
+        }
+
+        return popCityList;
     }
 
     public static String getStateAbr(String json, String state){
