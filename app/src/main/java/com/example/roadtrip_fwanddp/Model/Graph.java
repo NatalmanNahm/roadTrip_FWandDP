@@ -9,19 +9,19 @@ import java.util.Set;
 
 public class Graph {
 
-    private Set<Node> nodes = new HashSet<>();
+    private Set<DK_Node> DKNodes = new HashSet<>();
 
-    public void addNode(Node nodeA) {
-        nodes.add(nodeA);
+    public void addNode(DK_Node DKNodeA) {
+        DKNodes.add(DKNodeA);
     }
 
     // getters and setters
 
-    public Set<Node> getNodes() {
-        return nodes;
+    public Set<DK_Node> getDKNodes() {
+        return DKNodes;
     }
 
-    public void setNodes(Set<Node> nodes) {
-        this.nodes = nodes;
+    public void setDKNodes(Set<DK_Node> DKNodes) {
+        this.DKNodes = DKNodes;
     }
 }

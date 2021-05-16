@@ -2,8 +2,7 @@ package com.example.roadtrip_fwanddp.Utils;
 
 import android.util.Log;
 
-import com.example.roadtrip_fwanddp.Model.Graph;
-import com.example.roadtrip_fwanddp.Model.Node;
+import com.example.roadtrip_fwanddp.Model.DK_Node;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,54 +17,54 @@ import java.util.Set;
 
 public class Dk_Algorithm {
 
-    public static ArrayList<Node> calculateShortestPathFromSource( Node source) {
+    public static ArrayList<DK_Node> calculateShortestPathFromSource(DK_Node source) {
         source.setDistance(0);
 
-        ArrayList<Node> settledNodes = new ArrayList<>();
-        Set<Node> unsettledNodes = new HashSet<>();
+        ArrayList<DK_Node> settledDKNodes = new ArrayList<>();
+        Set<DK_Node> unsettledDKNodes = new HashSet<>();
 
-        unsettledNodes.add(source);
+        unsettledDKNodes.add(source);
 
-        while (unsettledNodes.size() != 0) {
-            Node currentNode = getLowestDistanceNode(unsettledNodes);
-            unsettledNodes.remove(currentNode);
-            for (Map.Entry< Node, Integer> adjacencyPair:
-                    currentNode.getAdjacentNodes().entrySet()) {
-                Node adjacentNode = adjacencyPair.getKey();
+        while (unsettledDKNodes.size() != 0) {
+            DK_Node currentDKNode = getLowestDistanceNode(unsettledDKNodes);
+            unsettledDKNodes.remove(currentDKNode);
+            for (Map.Entry<DK_Node, Integer> adjacencyPair:
+                    currentDKNode.getAdjacentNodes().entrySet()) {
+                DK_Node adjacentDKNode = adjacencyPair.getKey();
                 Integer edgeWeight = adjacencyPair.getValue();
-                if (!settledNodes.contains(adjacentNode)) {
-                    calculateMinimumDistance(adjacentNode, edgeWeight, currentNode);
-                    unsettledNodes.add(adjacentNode);
+                if (!settledDKNodes.contains(adjacentDKNode)) {
+                    calculateMinimumDistance(adjacentDKNode, edgeWeight, currentDKNode);
+                    unsettledDKNodes.add(adjacentDKNode);
                 }
             }
-            settledNodes.add(currentNode);
-            Log.i("NODEADDED", currentNode.getName());
-            Log.i("NODEADDED", currentNode.getDistance().toString());
+            settledDKNodes.add(currentDKNode);
+            Log.i("NODEADDED", currentDKNode.getName());
+            Log.i("NODEADDED", currentDKNode.getDistance().toString());
         }
-        return settledNodes;
+        return settledDKNodes;
     }
 
-    private static Node getLowestDistanceNode(Set < Node > unsettledNodes) {
-        Node lowestDistanceNode = null;
+    private static DK_Node getLowestDistanceNode(Set <DK_Node> unsettledDKNodes) {
+        DK_Node lowestDistanceDKNode = null;
         int lowestDistance = Integer.MAX_VALUE;
-        for (Node node: unsettledNodes) {
-            int nodeDistance = node.getDistance();
+        for (DK_Node DKNode : unsettledDKNodes) {
+            int nodeDistance = DKNode.getDistance();
             if (nodeDistance < lowestDistance) {
                 lowestDistance = nodeDistance;
-                lowestDistanceNode = node;
+                lowestDistanceDKNode = DKNode;
             }
         }
-        return lowestDistanceNode;
+        return lowestDistanceDKNode;
     }
 
-    private static void calculateMinimumDistance(Node evaluationNode,
-                                                 Integer edgeWeigh, Node sourceNode) {
-        Integer sourceDistance = sourceNode.getDistance();
-        if (sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
-            evaluationNode.setDistance(sourceDistance + edgeWeigh);
-            LinkedList<Node> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
-            shortestPath.add(sourceNode);
-            evaluationNode.setShortestPath(shortestPath);
+    private static void calculateMinimumDistance(DK_Node evaluationDKNode,
+                                                 Integer edgeWeigh, DK_Node sourceDKNode) {
+        Integer sourceDistance = sourceDKNode.getDistance();
+        if (sourceDistance + edgeWeigh < evaluationDKNode.getDistance()) {
+            evaluationDKNode.setDistance(sourceDistance + edgeWeigh);
+            LinkedList<DK_Node> shortestPath = new LinkedList<>(sourceDKNode.getShortestPath());
+            shortestPath.add(sourceDKNode);
+            evaluationDKNode.setShortestPath(shortestPath);
         }
     }
 }

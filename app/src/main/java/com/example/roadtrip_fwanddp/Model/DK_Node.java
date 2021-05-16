@@ -9,21 +9,21 @@ import java.util.Map;
  * Reference: Code copied form here: https://www.baeldung.com/java-dijkstra
  */
 
-public class Node {
+public class DK_Node {
 
     private String name;
 
-    private List<Node> shortestPath = new LinkedList<>();
+    private List<DK_Node> shortestPath = new LinkedList<>();
 
     private Integer distance = Integer.MAX_VALUE;
 
-    Map<Node, Integer> adjacentNodes = new HashMap<>();
+    Map<DK_Node, Integer> adjacentNodes = new HashMap<>();
 
-    public void addDestination(Node destination, int distance) {
+    public void addDestination(DK_Node destination, int distance) {
         adjacentNodes.put(destination, distance);
     }
 
-    public Node(String name) {
+    public DK_Node(String name) {
         this.name = name;
     }
 
@@ -34,7 +34,7 @@ public class Node {
         return name;
     }
 
-    public List<Node> getShortestPath() {
+    public List<DK_Node> getShortestPath() {
         return shortestPath;
     }
 
@@ -42,7 +42,7 @@ public class Node {
         return distance;
     }
 
-    public Map<Node, Integer> getAdjacentNodes() {
+    public Map<DK_Node, Integer> getAdjacentNodes() {
         return adjacentNodes;
     }
 
@@ -51,7 +51,7 @@ public class Node {
         this.name = name;
     }
 
-    public void setShortestPath(List<Node> shortestPath) {
+    public void setShortestPath(List<DK_Node> shortestPath) {
         this.shortestPath = shortestPath;
     }
 
@@ -59,7 +59,7 @@ public class Node {
         this.distance = distance;
     }
 
-    public void setAdjacentNodes(Map<Node, Integer> adjacentNodes) {
+    public void setAdjacentNodes(Map<DK_Node, Integer> adjacentNodes) {
         this.adjacentNodes = adjacentNodes;
     }
 }

@@ -2,21 +2,17 @@ package com.example.roadtrip_fwanddp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.roadtrip_fwanddp.Model.Graph;
 import com.example.roadtrip_fwanddp.Model.Location;
-import com.example.roadtrip_fwanddp.Model.Node;
+import com.example.roadtrip_fwanddp.Model.DK_Node;
 import com.example.roadtrip_fwanddp.Utils.Dk_Algorithm;
 import com.example.roadtrip_fwanddp.Utils.NetworkUtil;
 
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 public class TripOptionActivity extends AppCompatActivity {
@@ -29,9 +25,9 @@ public class TripOptionActivity extends AppCompatActivity {
     TextView tripTwoTxt;
     TextView tripThreeTxt;
     TextView currentTxt;
-    ArrayList<Node> shortestPath;
-    ArrayList<Node> getShortestPath1;
-    ArrayList<Node> getShortestPath3;
+    ArrayList<DK_Node> shortestPath;
+    ArrayList<DK_Node> getShortestPath1;
+    ArrayList<DK_Node> getShortestPath3;
 
 
     @Override
@@ -48,33 +44,33 @@ public class TripOptionActivity extends AppCompatActivity {
         tripThreeTxt = findViewById(R.id.opt1Trip3_txt);
         currentTxt = findViewById(R.id.option1);
 
-        Node nodeOrigin = new Node(curLoc.getLocation());
-        Node nodeDestination1 = new Node(option1.getLocation());
-        Node nodeDestination2 = new Node(option2.getLocation());
-        Node nodeDestination3 = new Node(option3.getLocation());
+        DK_Node DKNodeOrigin = new DK_Node(curLoc.getLocation());
+        DK_Node DKNodeDestination1 = new DK_Node(option1.getLocation());
+        DK_Node DKNodeDestination2 = new DK_Node(option2.getLocation());
+        DK_Node DKNodeDestination3 = new DK_Node(option3.getLocation());
 
         try {
             int org2dest1 = new FetchDistance(curLoc, option1).execute().get();
             int org2dest2 = new FetchDistance(curLoc, option2).execute().get();
             int org2dest3 = new FetchDistance(curLoc, option3).execute().get();
-            nodeOrigin.addDestination(nodeDestination1, org2dest1);
-            nodeOrigin.addDestination(nodeDestination2, org2dest2);
-            nodeOrigin.addDestination(nodeDestination3, org2dest3);
+            DKNodeOrigin.addDestination(DKNodeDestination1, org2dest1);
+            DKNodeOrigin.addDestination(DKNodeDestination2, org2dest2);
+            DKNodeOrigin.addDestination(DKNodeDestination3, org2dest3);
 
             int dest1_2_dest2 = new FetchDistance(option1, option2).execute().get();
             int dest1_2_dest3 = new FetchDistance(option1, option3).execute().get();
-            nodeDestination1.addDestination(nodeDestination2, dest1_2_dest2);
-            nodeDestination1.addDestination(nodeDestination3, dest1_2_dest3);
+            DKNodeDestination1.addDestination(DKNodeDestination2, dest1_2_dest2);
+            DKNodeDestination1.addDestination(DKNodeDestination3, dest1_2_dest3);
 
             int dest2_2_dest1 = new FetchDistance(option2, option1).execute().get();
             int dest2_2_dest3 = new FetchDistance(option2, option3).execute().get();
-            nodeDestination2.addDestination(nodeDestination1, dest2_2_dest1);
-            nodeDestination2.addDestination(nodeDestination3,dest2_2_dest3);
+            DKNodeDestination2.addDestination(DKNodeDestination1, dest2_2_dest1);
+            DKNodeDestination2.addDestination(DKNodeDestination3,dest2_2_dest3);
 
             int dest3_2_dest1 = new FetchDistance(option3, option1).execute().get();
             int dest3_2_dest2 = new FetchDistance(option3, option2).execute().get();
-            nodeDestination3.addDestination(nodeDestination1, dest3_2_dest1);
-            nodeDestination3.addDestination(nodeDestination2,dest3_2_dest2);
+            DKNodeDestination3.addDestination(DKNodeDestination1, dest3_2_dest1);
+            DKNodeDestination3.addDestination(DKNodeDestination2,dest3_2_dest2);
 
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -83,16 +79,16 @@ public class TripOptionActivity extends AppCompatActivity {
         }
 
         Graph graph = new Graph();
-        graph.addNode(nodeOrigin);
-        graph.addNode(nodeDestination1);
-        graph.addNode(nodeDestination2);
-        graph.addNode(nodeDestination3);
+        graph.addNode(DKNodeOrigin);
+        graph.addNode(DKNodeDestination1);
+        graph.addNode(DKNodeDestination2);
+        graph.addNode(DKNodeDestination3);
 
-        shortestPath = Dk_Algorithm.calculateShortestPathFromSource(nodeOrigin);
-        Node current = shortestPath.get(0);
-        Node firstStop = shortestPath.get(1);
-        Node secondStop = shortestPath.get(2);
-        Node thirdStop = shortestPath.get(3);
+        shortestPath = Dk_Algorithm.calculateShortestPathFromSource(DKNodeOrigin);
+        DK_Node current = shortestPath.get(0);
+        DK_Node firstStop = shortestPath.get(1);
+        DK_Node secondStop = shortestPath.get(2);
+        DK_Node thirdStop = shortestPath.get(3);
 
         String origin = current.getName();
         String stopOne = firstStop.getName();
