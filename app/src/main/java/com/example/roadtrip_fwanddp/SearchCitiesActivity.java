@@ -2,6 +2,8 @@ package com.example.roadtrip_fwanddp;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.Spinner;
 
 import com.example.roadtrip_fwanddp.Model.PopulationCities;
 import com.example.roadtrip_fwanddp.Model.State;
+import com.example.roadtrip_fwanddp.Utils.CityAdapter;
 import com.example.roadtrip_fwanddp.Utils.HashTable_Algorithm;
 import com.example.roadtrip_fwanddp.Utils.ReadJson;
 
@@ -62,9 +65,18 @@ public class SearchCitiesActivity extends AppCompatActivity implements AdapterVi
         adapter.notifyDataSetChanged();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         selectedState = parent.getItemAtPosition(position).toString();
+        adapter.notifyDataSetChanged();
+
+        RecyclerView recyclerView = findViewById(R.id.citiesRecyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ArrayList<PopulationCities> populationCities = hashtable.get(selectedState);
+        CityAdapter cityadapter = new CityAdapter(populationCities, this);
+        recyclerView.setAdapter(cityadapter);
         adapter.notifyDataSetChanged();
     }
 

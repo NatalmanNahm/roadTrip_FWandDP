@@ -20,7 +20,12 @@ import butterknife.ButterKnife;
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder> {
 
     ArrayList<PopulationCities> cities = new ArrayList<>();
+    Context context;
 
+    public CityAdapter(ArrayList<PopulationCities> cities, Context context) {
+        this.cities = cities;
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -64,9 +69,9 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
         }
 
         public void bindView(PopulationCities pop){
-            mState.setText(pop.getState());
-            mCity.setText(pop.getCity());
-            mPopulation.setText(pop.getPopulation());
+            mState.setText("State: " + pop.getState());
+            mCity.setText("City: " + pop.getCity());
+            mPopulation.setText("Population: " + pop.getPopulation());
         }
     }
 }
