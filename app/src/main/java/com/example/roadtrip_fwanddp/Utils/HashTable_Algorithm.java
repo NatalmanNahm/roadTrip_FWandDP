@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 // Class to represent entire hash table
-class HashTable_Algorithm<K, V> {
+public class HashTable_Algorithm<K, V> {
     // bucketArray is used to store array of chains
     private ArrayList<HashNode<K, V>> bucketArray;
 

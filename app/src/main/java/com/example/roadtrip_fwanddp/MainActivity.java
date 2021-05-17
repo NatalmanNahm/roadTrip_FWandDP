@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton addLocFab = findViewById(R.id.add_fab);
+        ExtendedFloatingActionButton addLocFab = findViewById(R.id.add_fab);
         addLocFab.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, TripOptionActivity.class);
             if (curLoc == null || opt1Loc == null || opt2Loc == null || opt3Loc == null ){
