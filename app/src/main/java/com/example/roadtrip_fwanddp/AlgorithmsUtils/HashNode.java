@@ -1,4 +1,8 @@
-package com.example.roadtrip_fwanddp.Model;
+package com.example.roadtrip_fwanddp.AlgorithmsUtils;
+
+/**
+ * Reference: https://www.geeksforgeeks.org/implementing-our-own-hash-table-with-separate-chaining-in-java/
+ */
 
 // A node of chains
 public class HashNode<K, V> {

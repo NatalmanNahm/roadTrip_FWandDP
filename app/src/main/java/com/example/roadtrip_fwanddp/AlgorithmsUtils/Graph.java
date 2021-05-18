@@ -1,4 +1,6 @@
-package com.example.roadtrip_fwanddp.Model;
+package com.example.roadtrip_fwanddp.AlgorithmsUtils;
+
+import com.example.roadtrip_fwanddp.AlgorithmsUtils.DK_Node;
 
 import java.util.HashSet;
 import java.util.Set;

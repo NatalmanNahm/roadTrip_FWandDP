@@ -1,11 +1,16 @@
-package com.example.roadtrip_fwanddp.Utils;
+package com.example.roadtrip_fwanddp.AlgorithmsUtils;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.roadtrip_fwanddp.Model.HashNode;
+import com.example.roadtrip_fwanddp.AlgorithmsUtils.HashNode;
 import java.util.ArrayList;
 import java.util.Objects;
+
+/**
+ * Reference: https://www.geeksforgeeks.org/implementing-our-own-hash-table-with-separate-chaining-in-java/
+ * Modified to fit my needs
+ */
 
 // Class to represent entire hash table
 public class HashTable_Algorithm<K, V> {

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,7 +15,7 @@ import android.widget.Spinner;
 import com.example.roadtrip_fwanddp.Model.PopulationCities;
 import com.example.roadtrip_fwanddp.Model.State;
 import com.example.roadtrip_fwanddp.Utils.CityAdapter;
-import com.example.roadtrip_fwanddp.Utils.HashTable_Algorithm;
+import com.example.roadtrip_fwanddp.AlgorithmsUtils.HashTable_Algorithm;
 import com.example.roadtrip_fwanddp.Utils.ReadJson;
 
 import java.util.ArrayList;

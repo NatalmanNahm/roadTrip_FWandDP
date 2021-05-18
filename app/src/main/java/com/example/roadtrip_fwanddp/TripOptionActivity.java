@@ -6,10 +6,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.roadtrip_fwanddp.Model.Graph;
+import com.example.roadtrip_fwanddp.AlgorithmsUtils.Graph;
 import com.example.roadtrip_fwanddp.Model.Location;
-import com.example.roadtrip_fwanddp.Model.DK_Node;
-import com.example.roadtrip_fwanddp.Utils.Dk_Algorithm;
+import com.example.roadtrip_fwanddp.AlgorithmsUtils.DK_Node;
+import com.example.roadtrip_fwanddp.AlgorithmsUtils.Dk_Algorithm;
 import com.example.roadtrip_fwanddp.Utils.NetworkUtil;
 
 import java.util.ArrayList;

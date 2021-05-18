@@ -1,4 +1,4 @@
-package com.example.roadtrip_fwanddp.Model;
+package com.example.roadtrip_fwanddp.AlgorithmsUtils;
 
 import java.util.HashMap;
 import java.util.LinkedList;

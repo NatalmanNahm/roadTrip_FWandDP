@@ -1,8 +1,8 @@
-package com.example.roadtrip_fwanddp.Utils;
+package com.example.roadtrip_fwanddp.AlgorithmsUtils;
 
 import android.util.Log;
 
-import com.example.roadtrip_fwanddp.Model.DK_Node;
+import com.example.roadtrip_fwanddp.AlgorithmsUtils.DK_Node;
 
 import java.util.ArrayList;
 import java.util.HashSet;
